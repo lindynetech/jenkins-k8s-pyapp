@@ -36,11 +36,7 @@ pipeline{
         }
         stage('Perfromance Testing') {
             steps {
-                NODE = sh(returnStdout: true, script: "kubectl get nodes -o jsonpath='{ $.items[0].status.addresses[?(@.type=="InternalIP")].address }'")
-                PORT = sh(returnStdout: true, script: "kubectl get svc pyrest-service -o=jsonpath='{.spec.ports[0].nodePort}'")
-                ENDPOINT=${NODE}:${PORT}
-                echo $ENDPOINT
-                sh "chmod +x performance-test.sh && ./performance-test.sh ${ENDPOINT}"
+                sh "chmod +x performance-test.sh && ./performance-test.sh"
             }
         }
         stage('Release') {
