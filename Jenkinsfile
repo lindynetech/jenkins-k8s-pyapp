@@ -10,7 +10,8 @@ pipeline{
             steps {
                 sh 'docker build -t $imageName"${BUILD_TIMESTAMP}'
             }
-        stage('Docker Login')
+        }
+        stage('Docker Login') {
             steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub',
                     usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
