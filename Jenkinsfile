@@ -37,9 +37,10 @@ pipeline{
         stage('Perfromance Testing') {
             steps {
                 NODE = sh(returnStdout: true, script: "kubectl get nodes -o jsonpath='{ $.items[0].status.addresses[?(@.type=="InternalIP")].address }'")
-                PORT = sh(returnStdout: true, script: "kubectl get svc calculator-service -o=jsonpath='{.spec.ports[0].nodePort}'")
+                PORT = sh(returnStdout: true, script: "kubectl get svc pyrest-service -o=jsonpath='{.spec.ports[0].nodePort}'")
                 ENDPOINT=${NODE}:${PORT}
-                sh "chmod +x performance-test.sh && ./performance-test.sh NODEIP"
+                echo $ENDPOINT
+                sh "chmod +x performance-test.sh && ./performance-test.sh ${ENDPOINT}"
             }
         }
         stage('Release') {
