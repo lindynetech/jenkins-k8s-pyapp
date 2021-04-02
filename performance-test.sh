@@ -7,6 +7,7 @@ N=100
 
 START=$(date +%s)
 for i in $(seq ${N}); do
+	echo "curl http://${ENDPOINT}"
 	curl http://${ENDPOINT}/
 done
 END=$(date +%s)
