@@ -8,7 +8,7 @@ pipeline{
     stages{
         stage("Docker build") {
             steps {
-                sh 'docker build -t $imageName"${BUILD_TIMESTAMP}'
+                sh 'docker build -t $imageName:${BUILD_TIMESTAMP}'
             }
         }
         stage('Docker Login') {
@@ -21,7 +21,7 @@ pipeline{
         }
         stage('Docker push') {
             steps {
-                sh 'docker push $imageName"${BUILD_TIMESTAMP}'
+                sh 'docker push $imageName:${BUILD_TIMESTAMP}'
             }
         }
         stage('Update Version') {
