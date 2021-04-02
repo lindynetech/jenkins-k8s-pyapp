@@ -32,7 +32,7 @@ pipeline{
         stage('Deploy to staging') {
             steps {
                 sh "kubectl config use-context staging"
-                sh 'kubeclt apply -f deployment.yml'
+                sh 'kubectl apply -f deployment.yml'
             }
         }
         stage('Perfromance Testing') {
@@ -43,7 +43,7 @@ pipeline{
         stage('Release') {
             steps {
                 sh "kubectl config use-context prod"
-                sh 'kubeclt apply -f deployment.yml'
+                sh 'kubectl apply -f deployment.yml'
             }
         }
     }
